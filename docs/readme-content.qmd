@@ -1,0 +1,78 @@
+---
+format: gfm
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+---
+
+## Overview
+
+[pipopaplot](https://github.com/paithiov909/pipopaplot) is an experimental R package for parameter mapping sonification.
+
+Sonification refers to the use of non-speech audio to convey information or perceptualize data.
+While data visualization translates data into shapes, positions, and colors, parameter mapping sonification maps data into sound parameters such as pitch, velocity, duration, or timing.
+
+pipopaplot is designed to work seamlessly with the [ggplot2](https://ggplot2.tidyverse.org/) ecosystem: you can use the same data-mapping logic that you use for visual plots, but instead of pixels, the output is musical notes.
+
+The package provides a small set of functions to bridge between ggplot-like data frames and MIDI events:
+
+- `as_notes()` — extract note-like data from ggplot layers or data frames
+- `rollup()` — aggregate or transform notes before playback
+- `sonify()` — convert note data into MIDI-ready event sequences
+- (optionally) `write_midi()` — save the resulting notes as a .mid file using built-in [craigsapp/midifile](https://github.com/craigsapp/midifile) library
+
+Together, these functions allow you to **hear** your data, explore its temporal patterns, or even compose algorithmic music directly from statistical graphics.
+
+
+## Usage
+
+A typical workflow consists of three steps.
+
+### 1. Create note data
+
+You can start from a ggplot object or any data frame.
+Use `as_notes()` to extract or format the columns that correspond to sonification aesthetics:
+
+```{r}
+library(ggplot2)
+# library(pipopaplot)
+pkgload::load_all(export_all = FALSE)
+
+gp <-
+  ggplot(mtcars, aes(mpg, wt)) +
+  geom_point()
+
+notes <- as_notes(gp)
+str(notes)
+```
+
+The resulting tibble will contain the columns
+`x`, `y`, `channel`, `group`, `duration`, and `velocity`.
+
+### 2. Transform or aggregate notes
+
+You can optionally summarize or reshape the note data before playback using `rollup()` or your own transformation pipeline:
+
+```{r}
+notes <- rollup(notes, x)
+str(notes)
+```
+
+Custom 'rollup' functions can also be defined by users — as long as they return a data frame with the required note columns.
+
+### 3. Convert to sound
+
+Finally, use `sonify()` to map data values into MIDI pitches, velocities, and durations.
+The resulting object can be passed to `write_midi()` to save as a .mid file:
+
+```{r}
+midi_data <- sonify(notes)
+str(midi_data)
+
+midi <- write_midi(midi_data, tempfile(fileext = ".mid"))
+dump_midi(midi) # for printing in the console
+```
+
+The default pitch range corresponds to a 76-key piano (27–102 in MIDI notes), and velocity is mapped roughly to mezzo-forte levels (60–100).
+Because values are rescaled internally, input ranges are arbitrary but must be finite.

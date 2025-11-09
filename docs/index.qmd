@@ -1,0 +1,71 @@
+---
+title: pipopaplot
+format: html
+include-in-header: dependencies.html
+resources: midi/*.mid
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
+    collapse: true
+    comment: "#>"
+    out.width: "100%"
+---
+
+{{< include ./readme-content.md >}}
+
+## Examples
+
+The example above is heared like this:
+
+```{=html}
+<midi-player src="midi/usage.mid" sound-font></midi-player>
+```
+
+Below is another example of with the `ggplot2::diamonds` dataset.
+We start with a ggplot density plot of carat by color and cut.
+
+```{r}
+library(ggplot2)
+# library(pipopaplot)
+pkgload::load_all(export_all = FALSE)
+
+gp <-
+  dplyr::filter(diamonds, cut %in% c("Good", "Ideal")) |>
+  dplyr::slice_head(n = 100) |>
+  ggplot(aes(carat, group = color)) +
+  facet_wrap(~ cut) +
+  scale_y_sqrt() +
+  geom_density()
+
+print(gp)
+```
+
+`as_notes()` can be used to extract the data from a ggplot object,
+however, it sometimes requires to be specified explicitly which columns are extracted,
+because the variables in a `ggplot_built` are dependent on the type of geometry used.
+
+```{r}
+dat <- get_layer_data(gp, 1)
+str(dat)
+```
+
+For example, layer data from `geom_density` does not have `size` column, so we need to specify which column goes to `velocity` here.
+
+```r
+midi_data <-
+  as_notes(dat, velocity = "density") |>
+  rollup(y, .fun = max) |>
+  sonify()
+
+write_midi(midi_data, "docs/midi/density.mid")
+```
+
+This example is heared like this:
+
+```{=html}
+<midi-player src="midi/density.mid" sound-font></midi-player>
+```
+
+## License
+
+BSD 2-Clause License.

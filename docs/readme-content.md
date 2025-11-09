@@ -1,11 +1,4 @@
-# pipopaplot
 
-
-<!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-<!-- badges: end -->
 
 ## Overview
 
@@ -177,7 +170,3 @@ The default pitch range corresponds to a 76-key piano (27–102 in MIDI
 notes), and velocity is mapped roughly to mezzo-forte levels (60–100).
 Because values are rescaled internally, input ranges are arbitrary but
 must be finite.
-
-## License
-
-BSD 2-Clause License.

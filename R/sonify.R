@@ -56,7 +56,7 @@ sonify <- function(
     notes,
     all_of(c("x", "y", "channel", "group", "duration", "velocity"))
   ) |>
-    group_by(!!!rlang::sym("channel")) |>
+    group_by(!!rlang::sym("channel")) |>
     mutate(
       group = forcats::fct_lump(factor(.data$group), n = .CHANNEL_MAX),
       t = rescale(.data$x, to = c(offset, 1 - offset)),
