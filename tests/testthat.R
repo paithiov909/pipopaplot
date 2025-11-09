@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(ggsound)
+library(pipopaplot)
 
-test_check("ggsound")
+test_check("pipopaplot")

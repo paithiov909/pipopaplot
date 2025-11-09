@@ -1,5 +1,6 @@
-^ggsound\.Rproj$
+^\.vscode$
 ^\.Rproj\.user$
+^pipopaplot\.Rproj$
 ^LICENSE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
