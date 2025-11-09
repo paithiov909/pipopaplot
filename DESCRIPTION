@@ -1,11 +1,13 @@
 Package: pipopaplot
 Title: Seamless Data Sonification with 'ggplot2'
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre")),
     person("Craig Stuart Sapp", role = "cph")
   )
-Description: What the package does (one paragraph).
+Description: Provides a simple framework for data sonification in R,
+    mapping 'ggplot2'-style aesthetics to MIDI events. Designed for creative
+    exploration rather than strict auditory data analysis.
 License: BSD_2_clause + file LICENSE
 URL: https://paithiov909.quarto.pub/pipopaplot/
 BugReports: https://github.com/paithiov909/pipopaplot/issues

@@ -21,7 +21,7 @@ The example above sounds like this:
 <midi-player src="midi/usage.mid" sound-font></midi-player>
 ```
 
-Below is another example of with the `ggplot2::diamonds` dataset.
+Below is another example using the `ggplot2::diamonds` dataset.
 We start with a ggplot density plot of carat by color and cut.
 
 ```{r}

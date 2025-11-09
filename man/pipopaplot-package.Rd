@@ -6,7 +6,7 @@
 \alias{pipopaplot-package}
 \title{pipopaplot: Seamless Data Sonification with 'ggplot2'}
 \description{
-What the package does (one paragraph).
+Provides a simple framework for data sonification in R, mapping 'ggplot2'-style aesthetics to MIDI events. Designed for creative exploration rather than strict auditory data analysis.
 }
 \seealso{
 Useful links:
