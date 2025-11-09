@@ -15,7 +15,7 @@ knitr:
 
 ## Examples
 
-The example above is heared like this:
+The example above sounds like this:
 
 ```{=html}
 <midi-player src="midi/usage.mid" sound-font></midi-player>
@@ -60,7 +60,7 @@ midi_data <-
 write_midi(midi_data, "docs/midi/density.mid")
 ```
 
-This example is heared like this:
+This example sounds like this:
 
 ```{=html}
 <midi-player src="midi/density.mid" sound-font></midi-player>

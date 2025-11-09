@@ -1,0 +1,4 @@
+- source: index.qmd
+  quarto-pub:
+    - id: 87f03161-7f1a-4451-bc3d-24a47e22435d
+      url: https://paithiov909.quarto.pub/pipopaplot

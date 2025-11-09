@@ -4,9 +4,17 @@
 \name{pipopaplot-package}
 \alias{pipopaplot}
 \alias{pipopaplot-package}
-\title{pipopaplot: What the Package Does (One Line, Title Case)}
+\title{pipopaplot: Seamless Data Sonification with 'ggplot2'}
 \description{
 What the package does (one paragraph).
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://paithiov909.quarto.pub/pipopaplot/}
+  \item Report bugs at \url{https://github.com/paithiov909/pipopaplot/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Akiru Kato \email{paithiov909@gmail.com}

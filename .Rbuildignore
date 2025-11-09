@@ -2,6 +2,6 @@
 ^\.Rproj\.user$
 ^pipopaplot\.Rproj$
 ^LICENSE\.md$
-^README\.Rmd$
+^README\.qmd$
 ^cran-comments\.md$
 ^docs$
