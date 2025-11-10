@@ -33,8 +33,8 @@ pkgload::load_all(export_all = FALSE)
 gp <-
   dplyr::filter(diamonds, cut %in% c("Good", "Ideal")) |>
   dplyr::slice_head(n = 100) |>
-  ggplot(aes(carat, group = color)) +
-  facet_wrap(~ cut) +
+  ggplot(aes(carat, group = cut)) +
+  facet_wrap(~ color) +
   scale_y_sqrt() +
   geom_density()
 
@@ -56,10 +56,14 @@ For example, layer data from `geom_density` does not have `size` column, so we n
 midi_data <-
   as_notes(dat, velocity = "density") |>
   rollup(x, .fun = max) |>
-  sonify()
+  sonify(phrase_len = 16)
 
 write_midi(midi_data, "docs/midi/density.mid")
 ```
+
+`rollup()` here aggregates note data by `channel`, `group`, and `x`, applying `max` function.
+`sonify()` then transforms the aggregated data into a data frame of 'note-on' and 'note-off' events while grouping by `channel` (derived from `PANEL`, i.e., the faceting variable `color`).
+`group` (derived from `cut`) is used to layout notes along the timeline. As a result, we have 2 phrases of 16 beats each in this .mid file.
 
 This example sounds like this:
 
