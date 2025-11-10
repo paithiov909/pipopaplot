@@ -1,5 +1,6 @@
 ---
 title: pipopaplot
+subtitle: Let's create pipopaplot because your plots deserve to sing 🎶
 format: html
 include-in-header: dependencies.html
 resources: midi/*.mid
@@ -42,7 +43,7 @@ print(gp)
 
 `as_notes()` can be used to extract the data from a ggplot object,
 however, it sometimes requires to be specified explicitly which columns are extracted,
-because the variables in a `ggplot_built` are dependent on the type of geometry used.
+because the variables in a layer data are dependent on the type of geometry used.
 
 ```{r}
 dat <- get_layer_data(gp, 1)
@@ -54,7 +55,7 @@ For example, layer data from `geom_density` does not have `size` column, so we n
 ```r
 midi_data <-
   as_notes(dat, velocity = "density") |>
-  rollup(y, .fun = max) |>
+  rollup(x, .fun = max) |>
   sonify()
 
 write_midi(midi_data, "docs/midi/density.mid")

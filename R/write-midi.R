@@ -25,11 +25,11 @@ verify_notes <- function(notes, opt) {
     cli::cli_abort("tick_on, tick_off, pitch, velocity must be integers")
   }
   range_pitch <- range(notes[["pitch"]])
-  if (range_pitch[1] < 0 || range_pitch[2] > 127) {
+  if (range_pitch[1] < 0 || range_pitch[2] > 127 || anyNA(range_pitch)) {
     cli::cli_abort("pitch must be between 0 and 127")
   }
   range_velocity <- range(notes[["velocity"]])
-  if (range_velocity[1] < 0 || range_velocity[2] > 127) {
+  if (range_velocity[1] < 0 || range_velocity[2] > 127 || anyNA(range_velocity)) {
     cli::cli_abort("velocity must be between 0 and 127")
   }
   if (length(opt[["programs"]]) != nlevels(notes[["channel"]])) {
@@ -38,7 +38,7 @@ verify_notes <- function(notes, opt) {
     )
   }
   range_program <- range(opt[["programs"]])
-  if (range_program[1] < 0 || range_program[2] > 127) {
+  if (range_program[1] < 0 || range_program[2] > 127 || anyNA(range_program)) {
     cli::cli_abort("programs must be between 0 and 127")
   }
   invisible(TRUE)
@@ -64,12 +64,23 @@ write_midi <- function(
   opt <-
     utils::modifyList(
       list(
-        tempo = 120,
+        tempo = 120, # currently unused
         tpq = 480,
         programs = seq_len(nlevels(notes[["channel"]])) - 1L
       ),
       opt
     )
+
+  # nolint start
+  # NOTE: filter out invalid events implicitly
+  notes <-
+    dplyr::filter(notes,
+      is.finite(.data$tick_on),
+      is.finite(.data$tick_off),
+      .data$tick_on >= 0,
+      .data$tick_off >= 0
+    )
+  # nolint end
   verify_notes(notes, opt)
 
   fp <-
