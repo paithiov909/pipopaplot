@@ -1,6 +1,6 @@
 Package: pipopaplot
 Title: Seamless Data Sonification with 'ggplot2'
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
     person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre")),
     person("Craig Stuart Sapp", role = "cph")

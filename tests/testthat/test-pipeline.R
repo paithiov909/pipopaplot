@@ -45,7 +45,7 @@ test_that("write_midi works", {
 
   tmp <- tempfile(fileext = ".mid")
   write_midi(sonified, tmp)
-  dump <- dump_midi(tmp) |>
+  dump <- dump_midi(tmp, print = FALSE) |>
     read.delim(text = _, header = FALSE, comment.char = ";")
 
   expect_snapshot_value(dump, style = "json2")

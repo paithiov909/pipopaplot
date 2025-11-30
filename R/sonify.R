@@ -56,9 +56,10 @@ sonify <- function(
     notes,
     all_of(c("x", "y", "channel", "group", "duration", "velocity"))
   ) |>
+    mutate(channel = forcats::fct_lump(factor(.data$channel), n = .CHANNEL_MAX)) |>
     group_by(!!rlang::sym("channel")) |>
     mutate(
-      group = forcats::fct_lump(factor(.data$group), n = .CHANNEL_MAX),
+      group = factor(.data$group),
       t = rescale(.data$x, to = c(offset, 1 - offset)),
       tick_on = rescale(
         t + (as.integer(.data$group) - 1),
