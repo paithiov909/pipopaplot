@@ -15,7 +15,7 @@ as_notes(d, ...)
 \arguments{
 \item{d}{A data frame or a \code{ggplot2} object.
 When a \code{ggplot2} object is given, the layer data is extracted using
-\code{\link[ggplot2:ggplot_build]{ggplot2::get_layer_data()}} with the layer index specified by \code{.id}.}
+\code{\link[ggplot2:get_layer_data]{ggplot2::get_layer_data()}} with the layer index specified by \code{.id}.}
 
 \item{...}{Optional name mappings.
 Provide named arguments to override the default column names
